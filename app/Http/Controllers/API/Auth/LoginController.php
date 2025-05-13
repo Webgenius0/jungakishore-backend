@@ -54,10 +54,10 @@ class LoginController extends Controller
                 }
             }
 
-            // Check password
-            if (!Hash::check($request->password, $user->password)) {
-                return Helper::jsonErrorResponse('Invalid password', 401);
-            }
+            // // Check password
+            // if (!Hash::check($request->password, $user->password)) {
+            //     return Helper::jsonErrorResponse('Invalid password', 401);
+            // }
 
             // Login user and generate token
             $token = auth('api')->login($user);
