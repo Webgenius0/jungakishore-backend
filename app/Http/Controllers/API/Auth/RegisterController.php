@@ -127,13 +127,6 @@ class RegisterController extends Controller
             $user->save();
 
 
-
-            // Notify admins about the new registration
-            // $admins = User::where('role', 'admin')->get();
-            // foreach ($admins as $admin) {
-            //     $admin->notify(new UserRegistrationNotification($user, "{$user->name} has joined the platform. Please review their details."));
-            // }
-
             // Generate an access token for the user
             $token = auth('api')->login($user);
 

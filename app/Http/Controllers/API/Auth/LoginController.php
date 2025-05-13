@@ -25,7 +25,7 @@ class LoginController extends Controller
         $request->validate([
             'email' => 'nullable|string|email|required_without:phone',
             'phone' => 'nullable|string|required_without:email',
-            'password' => 'required|string',
+            // 'password' => 'required|string',
         ]);
 
         try {
