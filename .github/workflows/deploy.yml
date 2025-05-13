@@ -15,6 +15,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           server: ftp.softvencefsd.xyz
-          username: jungakishore@softvencefsd.xyz
+          username: jungakishore@jungakishore.softvencefsd.xyz
           password: ${{ secrets.ftp_password }}
           timeout: 60
