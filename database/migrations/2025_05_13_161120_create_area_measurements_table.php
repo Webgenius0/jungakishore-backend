@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('area_measurements', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
+            $table->decimal('value', 10, 2)->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, HasRoles;
 
     // Rest omitted for brevity
 
@@ -115,4 +116,49 @@ class User extends Authenticatable implements JWTSubject
         // Return only the path for web requests
         return $value;
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(User::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(User::class, 'parent_id');
+    }
+
+    // Get all sub-users recursively
+    public function allDescendants()
+    {
+        return $this->children()->with('allDescendants');
+    }
+
+    // Get all descendant user IDs
+    public function allDescendantIds()
+    {
+        $ids = collect();
+
+        foreach ($this->children as $child) {
+            $ids->push($child->id);
+            $ids = $ids->merge($child->allDescendantIds());
+        }
+
+        return $ids;
+    }
+    public function scopeRole($query, $role)
+    {
+        return $query->whereHas('roles', function ($q) use ($role) {
+            $q->where('name', $role);
+        });
+    }
+    // public function teamPonds()
+    // {
+    //     $teamIds = $this->allDescendantIds()->push($this->id);
+    //     return Pond::whereIn('created_by', $teamIds)->orWhereIn('assigned_to', $teamIds)->get();
+    // }
+    // public function teamObservations()
+    // {
+    //     $pondIds = $this->teamPonds()->pluck('id');
+    //     return Observation::whereIn('pond_id', $pondIds)->get();
+    // }
 }

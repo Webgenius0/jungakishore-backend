@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\User;
+namespace App\Http\Controllers\API\V1\CMS;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
