@@ -20,6 +20,7 @@ Route::group(['middleware' => 'guest:api'], function ($router) {
     Route::post('/resend-otp', [RegisterController::class, 'ResendOtp']);
     //login
     Route::post('login', [LoginController::class, 'login']);
+    Route::post('/login/verify-otp', [LoginController::class, 'verifyLoginOtp']);
     //forgot password
     Route::post('/forget-password', [ResetPasswordController::class, 'forgotPassword']);
     Route::post('/verify-otp', [ResetPasswordController::class, 'VerifyOTP']);
