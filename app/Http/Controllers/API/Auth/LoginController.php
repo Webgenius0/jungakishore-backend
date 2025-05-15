@@ -105,4 +105,32 @@ class LoginController extends Controller
             return Helper::jsonErrorResponse($e->getMessage(), 500);
         }
     }
+
+    public function verifyOtp(Request $request)
+    {
+        $validateData = $request->validate($request->all(), [
+            'email' => 'nullable|string|email|required_without:phone',
+            'phone' => 'nullable|string|required_without:email',
+            'otp' => 'required|digits:4',
+        ]);
+
+        try {
+            $user=User::where('email', $request->email)->orWhere('phone', $request->phone)->first();
+            // Verify the OTP (this is just a placeholder, implement your own logic)
+            if ($request->otp !== '1234') {
+                return Helper::jsonErrorResponse('Invalid OTP', 422);
+            }
+
+            // OTP verified successfully
+            Helper::jsonResponse(true, 'OTP verified successfully.', 200);
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'OTP verified successfully.',
+            //     'code' => 200,
+            // ]);
+        } catch (Exception $e) {
+            Log::error('LoginController::verifyOtp ' . $e->getMessage());
+            return Helper::jsonErrorResponse('Something went wrong. Please try again later.', 500);
+        }
+    }
 }

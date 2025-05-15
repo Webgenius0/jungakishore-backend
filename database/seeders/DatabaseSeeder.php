@@ -36,5 +36,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(SystemSettingSeeder::class);
+        $this->call([RoleSeeder::class]);
+        // $this->call([WaterParameterSeeder::class]);
     }
 }
