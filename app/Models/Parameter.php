@@ -15,6 +15,7 @@ class Parameter extends Model
         'name',
         'short_name',
         'unit',
+        'is_default',
         'short_code',
     ];
 
@@ -23,6 +24,7 @@ class Parameter extends Model
         'name'        => 'string',
         'short_name'  => 'string',
         'unit'        => 'string',
+        'is_default'  => 'boolean',
         'short_code'  => 'string',
     ];
 
