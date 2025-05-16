@@ -8,6 +8,7 @@ use App\Models\Contractor;
 use App\Models\License;
 use App\Models\NotificationSetting;
 use App\Models\User;
+use App\Models\UserAddress;
 use App\Notifications\UserRegistrationNotification;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,15 +38,12 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:100',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
-            'phone' => 'nullable|unique:users,phone,' . auth()->user()->id . '|numeric|max_digits:20',
-            // 'password' => 'nullable|string|min:6|confirmed',
+            'tag_line' => 'nullable|string|max:1000',
+            'bio' => 'nullable|string|max:1000',
+            'working_location' => 'nullable|string|max:1000',
+            'language' => 'nullable|string|max:100',
         ]);
         try {
-            if (!empty($validatedData['password'])) {
-                $validatedData['password'] = bcrypt($validatedData['password']);
-            } else if (array_key_exists('password', $validatedData)) {
-                unset($validatedData['password']);
-            }
 
             $user = auth('api')->user();
             //upload avatar photo
@@ -57,14 +55,13 @@ class UserController extends Controller
             } else {
                 $validatedData['avatar'] = $user->avatar;
             }
-            //upload cover photo
-            if ($request->hasFile('cover_photo')) {
-                if (!empty($user->cover_photo)) {
-                    Helper::fileDelete(public_path($user->getRawOriginal('cover_photo')));
-                }
-                $validatedData['cover_photo'] = Helper::fileUpload($request->file('cover_photo'), 'user/cover_photo', getFileName($request->file('cover_photo')));
-            } else {
-                $validatedData['cover_photo'] = $user->cover_photo;
+            if ($validatedData['working_location']) {
+                UserAddress::updateOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'address' => $validatedData['working_location'],
+                    ]
+                );
             }
 
             $user->update($validatedData);
