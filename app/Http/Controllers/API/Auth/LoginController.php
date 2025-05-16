@@ -18,7 +18,6 @@ use App\Mail\OtpMail;
 class LoginController extends Controller
 {
 
-
     /**
      * Logs in the user.
      *
