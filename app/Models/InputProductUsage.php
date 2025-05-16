@@ -11,12 +11,12 @@ class InputProductUsage extends Model
     use HasFactory;
     protected $fillable = [
         'input_observation_id', 'product_id', 'quantity',
-        'perameter_id', 'unit_perameter', 'comment', 'images', 'created_by', 'status'
+        'parameter_id', 'unit_parameter', 'comment', 'images', 'created_by', 'status'
     ];
 
     protected $casts = [
         'quantity' => 'decimal:2',
-        'unit_perameter' => 'string',
+        'unit_parameter' => 'string',
         'images' => 'array',
         'created_by' => 'integer',
         'status' => 'string',

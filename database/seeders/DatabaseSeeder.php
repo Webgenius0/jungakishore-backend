@@ -39,5 +39,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SystemSettingSeeder::class);
         $this->call([RoleSeeder::class,AreaFarmingTypeSeeder::class,AreaMeasurementSeeder::class,ParameterSeeder::class,EnterpriseSeeder::class,CategoryAndSubCategorySeeder::class]);
+        $this->call([ProductSeeder::class,PondSeeder::class,ObservationSeeder::class,InputObservationSeeder::class,BiomassObservationSeeder::class,PondObservationSeeder::class,InputFarmerCommentSeeder::class, InputRemarksAndRxSeeder::class, InputFeedingSeeder::class, InputProductUsageSeeder::class]);
     }
 }

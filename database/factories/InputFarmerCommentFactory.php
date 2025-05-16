@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\InputFarmerComment;
 use App\Models\InputObservation;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
