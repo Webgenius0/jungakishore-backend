@@ -13,6 +13,7 @@ class AreaMeasurement extends Model
     protected $fillable = [
         'title',
         'slug',
+        'short_name',
         'value',
         'status',
     ];
@@ -20,6 +21,7 @@ class AreaMeasurement extends Model
     protected $casts = [
         'title' => 'string',
         'slug' => 'string',
+        'short_name' => 'string',
         'value' => 'decimal:2',
         'status' => 'string',
     ];
