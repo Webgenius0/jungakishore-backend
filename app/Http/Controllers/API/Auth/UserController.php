@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -24,7 +25,10 @@ class UserController extends Controller
      */
     public function me()
     {
-        return Helper::jsonResponse(true, 'User details fetched successfully', 200, auth('api')->user());
+        $user = auth('api')->user()->load(['userAddresses:id,user_id,address', 'areaFarmingTypes:id,title,slug']);
+        $user->makeHidden(['gender', 'parent_id', 'last_seen', 'deleted_at','user_time_zone']);
+
+        return Helper::jsonResponse(true, 'User details fetched successfully', 200, $user);
     }
 
     /**
@@ -42,63 +46,61 @@ class UserController extends Controller
             'bio' => 'nullable|string|max:1000',
             'working_location' => 'nullable|string|max:1000',
             'language' => 'nullable|string|max:100',
+            'area_farming_type_ids' => 'nullable|array',
+            'area_farming_type_ids.*' => 'nullable|exists:area_farming_types,id',
         ]);
-        try {
 
+        try {
             $user = auth('api')->user();
-            //upload avatar photo
+
+            // Upload avatar photo
             if ($request->hasFile('avatar')) {
                 if (!empty($user->avatar)) {
                     Helper::fileDelete(public_path($user->getRawOriginal('avatar')));
                 }
-                $validatedData['avatar'] = Helper::fileUpload($request->file('avatar'), 'user/avatar', getFileName($request->file('avatar')));
+                $validatedData['avatar'] = Helper::fileUpload(
+                    $request->file('avatar'),
+                    'user/avatar',
+                    getFileName($request->file('avatar'))
+                );
             } else {
                 $validatedData['avatar'] = $user->avatar;
             }
-            if ($validatedData['working_location']) {
+
+            // Update working location
+            if (!empty($validatedData['working_location'])) {
                 UserAddress::updateOrCreate(
                     ['user_id' => $user->id],
-                    [
-                        'address' => $validatedData['working_location'],
-                    ]
+                    ['address' => $validatedData['working_location']]
                 );
             }
 
+            // Sync area farming types
+            $user->areaFarmingTypes()->sync($validatedData['area_farming_type_ids'] ?? []);
+
+            // Remove non-user table fields before update
+            $validatedData = Arr::except($validatedData, ['area_farming_type_ids', 'working_location']);
+
+            // Update user profile
             $user->update($validatedData);
+
             return Helper::jsonResponse(true, 'Profile updated successfully', 200, $user);
+
         } catch (Exception $e) {
-            Log::error('UserController::updateProfile' . $e->getMessage());
-            return Helper::jsonErrorResponse('something went wrong', 403);
+            Log::error('UserController::updateProfile - ' . $e->getMessage());
+            return Helper::jsonErrorResponse('Something went wrong' . $e->getMessage(), 403);
         }
     }
 
-    /**
-     * Update the authenticated user's password.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function changePassword(Request $request)
+
+    public function userAreaMeasurements()
     {
-        $validatedData = $request->validate([
-            'current_password' => 'required|string',
-            'new_password' => 'required|string|min:6|confirmed',
-        ]);
         try {
             $user = auth('api')->user();
-
-            // Check if the current password matches the stored password
-            if (!\Hash::check($validatedData['current_password'], $user->password)) {
-                return Helper::jsonErrorResponse('Current password is incorrect', 422);
-            }
-
-            // Update the password
-            $user->update([
-                'password' => bcrypt($validatedData['new_password']),
-            ]);
-            return Helper::jsonResponse(true, 'Password updated successfully', 200);
+            $userAreaMeasurements = $user->areaMeasurements()->get();
+            return Helper::jsonResponse(true, 'User area measurements fetched successfully', 200, $userAreaMeasurements);
         } catch (Exception $e) {
-            Log::error('UserController::changePassword' . $e->getMessage());
+            Log::error('UserController::userAreaMeasurements' . $e->getMessage());
             return Helper::jsonErrorResponse('something went wrong', 403);
         }
     }
@@ -130,59 +132,4 @@ class UserController extends Controller
         }
     }
 
-
-    // notification setting
-    public function notificationSettings(Request $request)
-    {
-        // Validate the input data
-        $validatedData = $request->validate([
-            'general_notification' => 'nullable|boolean',
-            'sound' => 'nullable|boolean',
-            'vibration' => 'nullable|boolean',
-            'special_offer' => 'nullable|boolean',
-            'payment' => 'nullable|boolean',
-            'app_update' => 'nullable|boolean',
-            'other' => 'nullable|boolean'
-        ]);
-
-        try {
-            // Get the authenticated user
-            $user = auth('api')->user();
-
-            // Fetch the current notification settings for the user
-            $settings = NotificationSetting::firstOrNew(['user_id' => $user->id]);
-
-            // Update only the fields that were provided in the request
-            foreach ($validatedData as $key => $value) {
-                if (!is_null($value)) {
-                    $settings->{$key} = $value;
-                }
-            }
-
-            // Save the updated settings
-            $settings->save();
-
-            // Return a success response
-            return Helper::jsonResponse(true, 'Notification settings updated successfully', 200, $settings);
-        } catch (Exception $e) {
-            // Handle any errors and return a failure response
-            return Helper::jsonErrorResponse('Something went wrong', 403);
-        }
-    }
-
-
-    public function getNotificationSettings()
-    {
-        try {
-            $user = Auth::user();
-            $settings = NotificationSetting::where('user_id', $user->id)->first();
-
-            if (!$settings) {
-                return Helper::jsonErrorResponse('Notification settings not found', 404);
-            }
-            return Helper::jsonResponse(true, 'Notification settings fatch successfully', 200, $settings);
-        } catch (Exception $e) {
-            return Helper::jsonErrorResponse('something went wrong', 403);
-        }
-    }
 }

@@ -21,10 +21,7 @@ Route::group(['middleware' => 'guest:api'], function ($router) {
     //login
     Route::post('login', [LoginController::class, 'login']);
     Route::post('/login/verify-otp', [LoginController::class, 'verifyLoginOtp']);
-    //forgot password
-    Route::post('/forget-password', [ResetPasswordController::class, 'forgotPassword']);
     Route::post('/verify-otp', [ResetPasswordController::class, 'VerifyOTP']);
-    Route::post('/reset-password', [ResetPasswordController::class, 'ResetPassword']);
 
 });
 
@@ -33,7 +30,6 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::post('/logout', [LogoutController::class, 'logout']);
     Route::get('/me', [UserController::class, 'me']);
     Route::post('/update-profile', [UserController::class, 'updateProfile']);
-    Route::post('/update-password', [UserController::class, 'changePassword']);
     Route::delete('/delete-profile', [UserController::class, 'deleteProfile']);
 
 });
