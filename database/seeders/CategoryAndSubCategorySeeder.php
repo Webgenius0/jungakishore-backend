@@ -18,7 +18,7 @@ class CategoryAndSubCategorySeeder extends Seeder
         $data = [
             'Bluewight' => ['Minerals', 'Herbals', 'Probiotics', 'Vitamins'],
             'Vitwin' => ['Enzymes', 'Feed Additives', 'Growth Promoters'],
-            'Other' => ['Immunity Boosters', 'Herbals', 'Probiotics'],
+            'Other' => ['Immunity Boosters', 'Herbals_zp', 'Probiotics_zp'],
         ];
 
         foreach ($data as $company => $products) {

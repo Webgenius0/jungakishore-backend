@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\InputObservation;
+use App\Models\InputProductUsage;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,10 +23,10 @@ class InputProductUsageFactory extends Factory
     {
         return [
             'input_observation_id' => InputObservation::factory(),
-            'product_id' => Product::factory(),
+            'product_id' => Product::inRandomOrder()->value('id'),
             'quantity' => $this->faker->randomFloat(2, 1, 100),
-            'perameter_id' => null,
-            'unit_perameter' => $this->faker->randomElement(['g/kg', 'L/acre']),
+            'parameter_id' => null,
+            'unit_parameter' => $this->faker->randomElement(['g/kg', 'L/acre']),
             'comment' => $this->faker->paragraph,
             'images' => [$this->faker->imageUrl()],
             'created_by' => User::factory(),
