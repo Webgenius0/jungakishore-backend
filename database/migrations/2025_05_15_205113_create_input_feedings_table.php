@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('input_feedings', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('input_observation_id')->constrained()->onDelete('cascade');
+            $table->integer('no_of_feed_bags')->nullable();
+            $table->decimal('dob', 8, 2)->nullable();
+            $table->decimal('gnc', 8, 2)->nullable();
+            $table->decimal('moc', 8, 2)->nullable();
+            $table->decimal('pallet', 8, 2)->nullable();
+            $table->longText('comment')->nullable();
+            $table->json('images')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('input_feedings');
+    }
+};
