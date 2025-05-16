@@ -13,12 +13,14 @@ class AreaFarmingType extends Model
     protected $fillable = [
         'title',
         'slug',
+        'short_name',
         'status',
     ];
 
     protected $casts = [
         'title' => 'string',
         'slug' => 'string',
+        'short_name' => 'string',
         'status' => 'string',
     ];
 }
