@@ -42,6 +42,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
+        'tag_line',
         'email',
         'phone',
         'avatar',
@@ -160,4 +161,17 @@ class User extends Authenticatable implements JWTSubject
     //     $pondIds = $this->teamPonds()->pluck('id');
     //     return Observation::whereIn('pond_id', $pondIds)->get();
     // }
+
+    public function areaFarmingTypes()
+    {
+        return $this->belongsToMany(AreaFarmingType::class, 'user_area_farming_types', 'user_id', 'area_farming_type_id');
+    }
+    public function userAddresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+    public function userAreaMeasurements()
+    {
+        return $this->hasOne(UserAreaMeasurement::class);
+    }
 }
