@@ -30,14 +30,13 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validateData = $request->validate([
-            'phone' => 'nullable|numeric|max_digits:20|unique:users,phone,NULL,id,deleted_at,NULL',
+            'phone' => 'required|numeric|max_digits:20|unique:users,phone,NULL,id,deleted_at,NULL',
             'email' => 'required|string|email|max:150|unique:users,email,NULL,id,deleted_at,NULL',
-            'password' => 'required|string|min:6|confirmed',
-            'user_type' => 'required|in:individual',
         ]);
 
         try {
-            $otp = rand(1000, 9999);
+            // $otp = rand(1000, 9999);
+            $otp = 1234; // For testing purposes, use a fixed OTP
             $otpExpiresAt = Carbon::now()->addMinutes(60); // 1 hour
 
             // Check for soft-deleted user
@@ -57,7 +56,7 @@ class RegisterController extends Controller
                     'email' => $request->input('email'),
                     'phone' => $request->input('phone'),
                     'password' => Hash::make($request->input('password')),
-                    'user_type' => $request->input('user_type'),
+                    'user_type' => 'individual',
                     'otp' => $otp,
                     'otp_expires_at' => $otpExpiresAt,
                 ]);
@@ -67,7 +66,7 @@ class RegisterController extends Controller
                     'email' => $request->input('email'),
                     'phone' => $request->input('phone'),
                     'password' => Hash::make($request->input('password')),
-                    'user_type' => $request->input('user_type'),
+                    'user_type' => 'individual',
                     'otp' => $otp,
                     'otp_expires_at' => $otpExpiresAt,
                 ];
