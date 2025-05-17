@@ -10,14 +10,13 @@ class InputRemarksAndRx extends Model
     /** @use HasFactory<\Database\Factories\InputRemarksAndRxFactory> */
     use HasFactory;
 
-    protected $fillable = ['input_observation_id', 'product_id', 'type', 'comment', 'images', 'created_by', 'status'];
+    protected $fillable = ['input_observation_id', 'bill_amount', 'comment', 'images', 'created_by', 'status'];
 
     protected $casts = [
+        'bill_amount' => 'integer',
         'images' => 'array',
         'created_by' => 'integer',
         'input_observation_id' => 'integer',
-        'product_id' => 'integer',
-        'type' => 'string',
         'comment' => 'string',
         'status' => 'string',
     ];
@@ -30,5 +29,9 @@ class InputRemarksAndRx extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function inputProductUsageParameterReadings()
+    {
+        return $this->hasMany(InputProductUsageReading::class);
     }
 }
