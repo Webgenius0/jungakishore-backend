@@ -23,8 +23,7 @@ class InputRemarksAndRxFactory extends Factory
     {
         return [
             'input_observation_id' => InputObservation::factory(),
-            'product_id' => Product::inRandomOrder()->value('id'),
-            'type' => $this->faker->randomElement(['commercial', 'trial']),
+            'bill_amount' => $this->faker->numberBetween(100, 1000),
             'comment' => $this->faker->paragraph,
             'images' => [$this->faker->imageUrl()],
             'created_by' => User::factory(),
