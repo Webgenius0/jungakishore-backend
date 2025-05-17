@@ -12,7 +12,8 @@ class BiomassObservation extends Model
     protected $fillable = ['observation_id', 'created_by', 'status'];
 
     protected $casts = [
-        'status' => 'string',
+        'observation_id' => 'integer',
         'created_by' => 'integer',
+        'status' => 'string',
     ];
 }
