@@ -25,4 +25,9 @@ class AreaMeasurement extends Model
         'value' => 'decimal:2',
         'status' => 'string',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'area_measurement_id');
+    }
 }
