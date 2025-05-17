@@ -16,6 +16,21 @@ class Enterprise extends Model
         'status',
     ];
 
+    protected $casts = [
+        'name' => 'string',
+        'slug' => 'string',
+        'created_by' => 'integer',
+        'status' => 'string',
+    ];
+    // Relationships (Optional)
+    public function ponds()
+    {
+        return $this->hasMany(Pond::class, 'enter_prise_id');
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'created_by');
+    }
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
