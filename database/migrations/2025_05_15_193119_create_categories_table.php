@@ -15,9 +15,7 @@ return new class extends Migration {
             $table->foreignId('enter_prise_id')->nullable()->constrained('enterprises')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->defaultMeta();
         });
     }
 

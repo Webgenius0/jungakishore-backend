@@ -13,10 +13,6 @@ return new class extends Migration {
         Schema::create('input_product_usages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('input_observation_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->decimal('quantity', 8, 2)->nullable();
-            $table->foreignId('parameter_id')->nullable()->constrained('parameters')->onDelete('set null');
-            $table->string('unit_parameter')->nullable(); // like 'g/kg', 'L/acre'
             $table->longText('comment')->nullable();
             $table->json('images')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
