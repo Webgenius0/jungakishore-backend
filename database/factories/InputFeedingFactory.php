@@ -23,10 +23,6 @@ class InputFeedingFactory extends Factory
         return [
             'input_observation_id' => InputObservation::factory(),
             'no_of_feed_bags' => $this->faker->numberBetween(1, 10),
-            'dob' => $this->faker->randomFloat(2, 0, 10),
-            'gnc' => $this->faker->randomFloat(2, 0, 10),
-            'moc' => $this->faker->randomFloat(2, 0, 10),
-            'pallet' => $this->faker->randomFloat(2, 0, 10),
             'comment' => $this->faker->sentence,
             'images' => [$this->faker->imageUrl()],
             'created_by' => User::factory(),

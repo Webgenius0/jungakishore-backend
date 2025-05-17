@@ -17,24 +17,25 @@ class ProductSeeder extends Seeder
         $products = [
             'Bluewight' => [
                 'Minerals' => [
-                    ['name' => 'Mineral Max', 'short_name' => 'MM', 'price' => 120.50],
-                    ['name' => 'Ocean Mineral', 'short_name' => 'OM', 'price' => 95.00],
+                    ['name' => 'Mineral Max', 'short_name' => 'MM', 'price' => 120.50, 'unit_parameter' => 'g/kg'],
+                    ['name' => 'Mineral Pro', 'short_name' => 'MP', 'price' => 110.00, 'unit_parameter' => 'g/kg'],
+                    ['name' => 'Ocean Mineral', 'short_name' => 'OM', 'price' => 95.00, 'unit_parameter' => 'g/kg'],
                 ],
                 'Probiotics' => [
-                    ['name' => 'Aqua Pro', 'short_name' => 'AP', 'price' => 150.00],
+                    ['name' => 'Aqua Pro', 'short_name' => 'AP', 'price' => 150.00, 'unit_parameter' => 'g/kg'],
                 ],
             ],
             'Vitwin' => [
                 'Enzymes' => [
-                    ['name' => 'Vitazyme', 'short_name' => 'VZ', 'price' => 130.00],
+                    ['name' => 'Vitazyme', 'short_name' => 'VZ', 'price' => 130.00, 'unit_parameter' => 'g/kg'],
                 ],
                 'Growth Promoters' => [
-                    ['name' => 'GroFast', 'short_name' => 'GF', 'price' => 145.75],
+                    ['name' => 'GroFast', 'short_name' => 'GF', 'price' => 145.75, 'unit_parameter' => 'g/kg'],
                 ],
             ],
             'Other' => [
                 'Herbals' => [
-                    ['name' => 'HerboLiv', 'short_name' => 'HL', 'price' => 100.00],
+                    ['name' => 'HerboLiv', 'short_name' => 'HL', 'price' => 100.00, 'unit_parameter' => 'g/kg'],
                 ],
             ],
         ];
@@ -61,6 +62,7 @@ class ProductSeeder extends Seeder
                         'slug' => Str::slug($item['name']),
                         'short_name' => $item['short_name'],
                         'price_per_unit' => $item['price'],
+                        'unit_parameter' => $item['unit_parameter'],
                         'created_by' => null,
                         'status' => 'active',
                     ]);

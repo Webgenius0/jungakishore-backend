@@ -23,10 +23,6 @@ class InputProductUsageFactory extends Factory
     {
         return [
             'input_observation_id' => InputObservation::factory(),
-            'product_id' => Product::inRandomOrder()->value('id'),
-            'quantity' => $this->faker->randomFloat(2, 1, 100),
-            'parameter_id' => null,
-            'unit_parameter' => $this->faker->randomElement(['g/kg', 'L/acre']),
             'comment' => $this->faker->paragraph,
             'images' => [$this->faker->imageUrl()],
             'created_by' => User::factory(),

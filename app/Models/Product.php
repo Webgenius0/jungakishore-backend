@@ -14,6 +14,7 @@ class Product extends Model
         'slug',
         'short_name',
         'price_per_unit',
+        'unit_parameter', // e.g., 'kg', 'litre', 'g'
         'created_by',
         'status',
     ];
@@ -23,6 +24,7 @@ class Product extends Model
         'category_id' => 'integer',
         'sub_category_id' => 'integer',
         'price_per_unit' => 'float',
+        'unit_parameter' => 'string',
         'created_by' => 'integer',
         'status' => 'string',
     ];

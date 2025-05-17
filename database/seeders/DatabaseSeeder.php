@@ -37,8 +37,20 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'individual',
         ]);
 
+        // Pond::factory()  when developing use this
+        // ->has(
+        //     Observation::factory()
+        //         ->has(InputObservation::factory()
+        //             ->has(InputRemarksAndRx::factory()
+        //                 ->has(InputProductUsageReading::factory()->count(3))
+        //             )
+        //         )
+        // )->create();
+
+
         $this->call(SystemSettingSeeder::class);
         $this->call([RoleSeeder::class,AreaFarmingTypeSeeder::class,AreaMeasurementSeeder::class,ParameterSeeder::class,EnterpriseSeeder::class,CategoryAndSubCategorySeeder::class]);
         $this->call([ProductSeeder::class,PondSeeder::class,ObservationSeeder::class,InputObservationSeeder::class,BiomassObservationSeeder::class,PondObservationSeeder::class,InputFarmerCommentSeeder::class, InputRemarksAndRxSeeder::class, InputFeedingSeeder::class, InputProductUsageSeeder::class]);
+        $this->call(InputProductUsageReadingSeeder::class);
     }
 }
