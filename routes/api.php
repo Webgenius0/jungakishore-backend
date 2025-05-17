@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::post('/logout', [LogoutController::class, 'logout']);
     Route::get('/me', [UserController::class, 'me']);
     Route::post('/update-profile', [UserController::class, 'updateProfile']);
+    Route::post('/update-area-measurement', [UserController::class, 'updateAreaMeasurement']);
     Route::delete('/delete-profile', [UserController::class, 'deleteProfile']);
 
 });

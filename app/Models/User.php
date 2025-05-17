@@ -170,8 +170,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(UserAddress::class);
     }
-    public function userAreaMeasurements()
+    // public function areaMeasurements()
+    // {
+    //     return $this->belongsToMany(AreaMeasurement::class, 'user_area_measurements', 'user_id', 'area_measurement_id');
+    // }
+    public function areaMeasurement()
     {
-        return $this->hasOne(UserAreaMeasurement::class);
+        return $this->belongsTo(AreaMeasurement::class, 'area_measurement_id');
     }
+
 }
