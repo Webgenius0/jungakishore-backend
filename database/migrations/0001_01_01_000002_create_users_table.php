@@ -20,8 +20,9 @@ return new class extends Migration {
             $table->string('avatar')->nullable();
             $table->enum('gender', ['male', 'female', 'others'])->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('user_type', ['individual', 'enterprise','admin'])->default('individual');
+            $table->enum('user_type', ['individual', 'enterprise', 'admin'])->default('individual');
             $table->foreignId('parent_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('area_measurement_id')->nullable()->constrained('area_measurements')->onDelete('set null');
             $table->string('user_time_zone')->nullable();
             $table->string('language')->nullable();
             $table->longText('bio')->nullable();

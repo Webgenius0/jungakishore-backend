@@ -26,8 +26,7 @@ class UserController extends Controller
     public function me()
     {
         $user = auth('api')->user()->load(['userAddresses:id,user_id,address', 'areaFarmingTypes:id,title,slug']);
-        $user->makeHidden(['gender', 'parent_id', 'last_seen', 'deleted_at','user_time_zone']);
-
+        $user->makeHidden(['gender', 'parent_id', 'last_seen', 'deleted_at', 'user_time_zone']);
         return Helper::jsonResponse(true, 'User details fetched successfully', 200, $user);
     }
 
@@ -93,15 +92,21 @@ class UserController extends Controller
     }
 
 
-    public function userAreaMeasurements()
+    public function updateAreaMeasurement(Request $request)
     {
+        $validatedData = $request->validate([
+            'area_measurement_id' => 'required|exists:area_measurements,id',
+        ]);
+
         try {
             $user = auth('api')->user();
-            $userAreaMeasurements = $user->areaMeasurements()->get();
-            return Helper::jsonResponse(true, 'User area measurements fetched successfully', 200, $userAreaMeasurements);
+            $user->area_measurement_id = $validatedData['area_measurement_id'];
+            $user->save();
+
+            return Helper::jsonResponse(true, 'User area measurement set successfully', 200, $user->load('areaMeasurement'));
         } catch (Exception $e) {
-            Log::error('UserController::userAreaMeasurements' . $e->getMessage());
-            return Helper::jsonErrorResponse('something went wrong', 403);
+            \Log::error('UserController::updateAreaMeasurement => ' . $e->getMessage());
+            return Helper::jsonErrorResponse('Something went wrong'. $e->getMessage(), 403);
         }
     }
 
