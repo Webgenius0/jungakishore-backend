@@ -10,13 +10,12 @@ class InputProductUsage extends Model
     /** @use HasFactory<\Database\Factories\InputProductUsageFactory> */
     use HasFactory;
     protected $fillable = [
-        'input_observation_id', 'product_id', 'quantity',
-        'parameter_id', 'unit_parameter', 'comment', 'images', 'created_by', 'status'
+        'input_observation_id','comment', 'images', 'created_by', 'status'
     ];
 
     protected $casts = [
-        'quantity' => 'decimal:2',
-        'unit_parameter' => 'string',
+        'input_observation_id' => 'integer',
+        'comment' => 'string',
         'images' => 'array',
         'created_by' => 'integer',
         'status' => 'string',
