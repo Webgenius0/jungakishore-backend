@@ -28,7 +28,8 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'nullable|string|email|required_without:phone',
-            'phone' => 'nullable|string|required_without:email',
+            'phone' => 'nullable|string|required_without:email|
+                regex:/^(\+?\d{1,4}[\s-]?)?(\(?\d{1,3}\)?[\s-]?)?[\d\s-]{7,15}$/',
         ]);
 
         try {
