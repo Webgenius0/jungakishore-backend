@@ -13,9 +13,7 @@ return new class extends Migration {
         Schema::create('input_observations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('observation_id')->constrained()->onDelete('cascade');
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->defaultMeta();
         });
     }
 

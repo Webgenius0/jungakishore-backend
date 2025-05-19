@@ -13,14 +13,14 @@ class Observation extends Model
     protected $fillable = [
         'pond_id',
         'unique_id',
-        'obzrve_by',
+        'observed_by_id',
         'status',
     ];
 
     protected $casts = [
         'pond_id' => 'integer',
         'unique_id' => 'string',
-        'obzrve_by' => 'string',
+        'observed_by_id' => 'string',
         'status' => 'string',
     ];
 

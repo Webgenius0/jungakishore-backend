@@ -11,6 +11,7 @@ class Parameter extends Model
     use HasFactory;
 
     protected $fillable = [
+        'enter_prise_id',
         'type',
         'name',
         'short_name',
@@ -20,6 +21,7 @@ class Parameter extends Model
     ];
 
     protected $casts = [
+        'enter_prise_id' => 'integer',
         'type'        => 'string',
         'name'        => 'string',
         'short_name'  => 'string',

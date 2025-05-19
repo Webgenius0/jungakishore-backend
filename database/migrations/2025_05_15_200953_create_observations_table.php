@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('pond_id')->constrained()->onDelete('cascade');
             $table->string('unique_id')->unique();
-            $table->string('obzrve_by');
+            $table->foreignId('observed_by_id')->nullable()->constrained('users')->onDelete('set null');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,9 +19,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('short_name')->nullable();
             $table->decimal('price_per_unit', 10, 2)->default(0.00);
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->string('unit_parameter')->nullable(); // e.g., 'kg', 'litre', 'g'
+            $table->defaultMeta();
         });
     }
 

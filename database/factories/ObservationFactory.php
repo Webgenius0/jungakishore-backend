@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Observation;
 use App\Models\Pond;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class ObservationFactory extends Factory
         return [
             'pond_id' => Pond::factory(),
             'unique_id' => $this->faker->uuid,
-            'obzrve_by' => $this->faker->name,
+            'observed_by_id' => null,
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
