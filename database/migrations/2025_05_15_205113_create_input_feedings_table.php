@@ -16,9 +16,7 @@ return new class extends Migration {
             $table->integer('no_of_feed_bags')->nullable();
             $table->longText('comment')->nullable();
             $table->json('images')->nullable();
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->defaultMeta();
         });
     }
 

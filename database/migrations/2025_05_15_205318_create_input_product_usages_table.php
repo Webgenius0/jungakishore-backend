@@ -15,9 +15,7 @@ return new class extends Migration {
             $table->foreignId('input_observation_id')->constrained()->onDelete('cascade');
             $table->longText('comment')->nullable();
             $table->json('images')->nullable();
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->defaultMeta();
         });
     }
 

@@ -20,9 +20,7 @@ return new class extends Migration {
             $table->string('short_name')->nullable();
             $table->decimal('price_per_unit', 10, 2)->default(0.00);
             $table->string('unit_parameter')->nullable(); // e.g., 'kg', 'litre', 'g'
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->timestamps();
+            $table->defaultMeta();
         });
     }
 

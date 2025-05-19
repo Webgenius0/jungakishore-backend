@@ -32,22 +32,30 @@ class ParameterSeeder extends Seeder
             ['type' => 'soil', 'name' => 'Phosphorus', 'short_name' => 'P', 'unit' => 'ppm', 'short_code' => 'ppm'],
             ['type' => 'soil', 'name' => 'Potassium', 'short_name' => 'K', 'unit' => 'ppm', 'short_code' => 'ppm'],
 
-            // 🧫 Microbe Parameters
-            ['type' => 'microbe', 'name' => 'Total Bacteria Count', 'short_name' => 'TBC', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
-            ['type' => 'microbe', 'name' => 'Vibrio Count', 'short_name' => 'VC', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
-            ['type' => 'microbe', 'name' => 'Fungal Count', 'short_name' => 'FC', 'unit' => 'CFU/g', 'short_code' => 'CFU'],
-            ['type' => 'microbe', 'name' => 'Actinomycetes Count', 'short_name' => 'AC', 'unit' => 'CFU/g', 'short_code' => 'CFU'],
-            ['type' => 'microbe', 'name' => 'Lactic Acid Bacteria', 'short_name' => 'LAB', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+            // 🧫 Microbe Parameters  
+            ['type' => 'microbe', 'name' => 'Green Vibrio', 'short_name' => 'GV', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+            ['type' => 'microbe', 'name' => 'Yellow Vibrio', 'short_name' => 'YV', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+            ['type' => 'microbe', 'name' => 'Aeromonas', 'short_name' => 'AERO', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+            ['type' => 'microbe', 'name' => 'Pseudomonas', 'short_name' => 'PS', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+            ['type' => 'microbe', 'name' => 'Total Plate Count', 'short_name' => 'TPC', 'unit' => 'CFU/mL', 'short_code' => 'CFU'],
+
+            // ➕ Additional microbes
+            ['type' => 'microbe', 'name' => 'Total Bacteria Count', 'short_name' => 'TBC', 'unit' => 'CFU/mL', 'short_code' => 'CFU', 'is_default' => false],
+            ['type' => 'microbe', 'name' => 'Vibrio Count', 'short_name' => 'VC', 'unit' => 'CFU/mL', 'short_code' => 'CFU', 'is_default' => false],
+            ['type' => 'microbe', 'name' => 'Fungal Count', 'short_name' => 'FC', 'unit' => 'CFU/g', 'short_code' => 'CFU', 'is_default' => false],
+            ['type' => 'microbe', 'name' => 'Actinomycetes Count', 'short_name' => 'AC', 'unit' => 'CFU/g', 'short_code' => 'CFU', 'is_default' => false],
+            ['type' => 'microbe', 'name' => 'Lactic Acid Bacteria', 'short_name' => 'LAB', 'unit' => 'CFU/mL', 'short_code' => 'CFU', 'is_default' => false],
+
 
             // 🐟 Fish Names
             ['type' => 'fish', 'name' => 'Rohu,R', 'short_name' => 'Rohu', 'unit' => null, 'short_code' => 'ROH'],
-            ['type' => 'fish', 'name' => 'Catla,C', 'short_name' => 'Catla', 'unit' => null, 'short_code' => 'CAT'],
-            ['type' => 'fish', 'name' => 'Tilapia,TP', 'short_name' => 'Tilapia', 'unit' => null, 'short_code' => 'TIL', 'is_default' => false],
+            ['type' => 'fish', 'name' => 'Catla,C', 'short_name' => 'Catla', 'unit' => null, 'short_code' => 'CAT'], 
             ['type' => 'fish', 'name' => 'Mrigal,M', 'short_name' => 'Mrigal', 'unit' => null, 'short_code' => 'MRI'],
             ['type' => 'fish', 'name' => 'Vannamei,V', 'short_name' => 'Vannamei', 'unit' => null, 'short_code' => 'VAN'],
             ['type' => 'fish', 'name' => 'Tiger,T', 'short_name' => 'Tiger', 'unit' => null, 'short_code' => 'TIG'],
             ['type' => 'fish', 'name' => 'Rupchanda,R', 'short_name' => 'Rupchanda', 'unit' => null, 'short_code' => 'RUP', 'is_default' => false],
             ['type' => 'fish', 'name' => 'Pangasius,P', 'short_name' => 'Pangasius', 'unit' => null, 'short_code' => 'PAN', 'is_default' => false],
+            ['type' => 'fish', 'name' => 'Tilapia,TP', 'short_name' => 'Tilapia', 'unit' => null, 'short_code' => 'TIL', 'is_default' => false],
 
 
             // feeding parameters

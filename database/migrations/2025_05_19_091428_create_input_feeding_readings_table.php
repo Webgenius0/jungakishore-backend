@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pond_observations', function (Blueprint $table) {
+        Schema::create('input_feeding_readings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('observation_id')->constrained()->onDelete('cascade');
-            $table->defaultMeta();
+            $table->timestamps();
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pond_observations');
+        Schema::dropIfExists('input_feeding_readings');
     }
 };
