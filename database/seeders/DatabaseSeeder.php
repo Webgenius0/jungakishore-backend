@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\City;
+use App\Models\PlanktonCategory;
+use App\Models\PlanktonSubcategory;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -49,8 +51,28 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(SystemSettingSeeder::class);
-        $this->call([RoleSeeder::class,AreaFarmingTypeSeeder::class,AreaMeasurementSeeder::class,ParameterSeeder::class,EnterpriseSeeder::class,CategoryAndSubCategorySeeder::class]);
-        $this->call([ProductSeeder::class,PondSeeder::class,ObservationSeeder::class,InputObservationSeeder::class,BiomassObservationSeeder::class,PondObservationSeeder::class,InputFarmerCommentSeeder::class, InputRemarksAndRxSeeder::class, InputFeedingSeeder::class, InputProductUsageSeeder::class]);
+        $this->call([RoleSeeder::class, AreaFarmingTypeSeeder::class, AreaMeasurementSeeder::class, ParameterSeeder::class, EnterpriseSeeder::class, CategoryAndSubCategorySeeder::class]);
+        $this->call([ProductSeeder::class, PondSeeder::class, ObservationSeeder::class, InputObservationSeeder::class, BiomassObservationSeeder::class, PondObservationSeeder::class, InputFarmerCommentSeeder::class, InputRemarksAndRxSeeder::class, InputFeedingSeeder::class, InputProductUsageSeeder::class]);
+
+        $this->call(InputFeedingReadingSeeder::class);
         $this->call(InputProductUsageReadingSeeder::class);
+        $this->call(InputRemarksAndRxReadingSeeder::class);
+
+
+        $this->call(PondWaterSeeder::class);
+        $this->call(PondSoilSeeder::class);
+        $this->call(PondPlanktonSeeder::class);
+        $this->call(PondMicrobeSeeder::class);
+
+        PlanktonCategory::factory()
+            ->count(5)
+            ->has(PlanktonSubcategory::factory()->count(3), 'subcategories')
+            ->create();
+
+        $this->call(PondWaterReadingSeeder::class);
+        $this->call(PondSoilReadingSeeder::class);
+        $this->call(PondPlanktonReadingSeeder::class);
+        $this->call(PondMicrobeReadingSeeder::class);
+
     }
 }

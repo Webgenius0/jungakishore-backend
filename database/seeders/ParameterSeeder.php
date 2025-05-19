@@ -60,10 +60,10 @@ class ParameterSeeder extends Seeder
 
             // feeding parameters
             // ['type' => 'other', 'name' => 'No of Feed Bags', 'short_name' => 'NFB', 'unit' => null, 'short_code' => 'NFB'],
-            ['type' => 'other', 'name' => 'Date of Birth', 'short_name' => 'DOB', 'unit' => null, 'short_code' => 'DOB'],
-            ['type' => 'other', 'name' => 'GNC', 'short_name' => 'GNC', 'unit' => null, 'short_code' => 'GNC'],
-            ['type' => 'other', 'name' => 'MOC', 'short_name' => 'MOC', 'unit' => null, 'short_code' => 'MOC'],
-            ['type' => 'other', 'name' => 'Pallet', 'short_name' => 'PALLET', 'unit' => null, 'short_code' => null],
+            ['type' => 'feeding', 'name' => 'Date of Birth', 'short_name' => 'DOB', 'unit' => null, 'short_code' => 'DOB'],
+            ['type' => 'feeding', 'name' => 'GNC', 'short_name' => 'GNC', 'unit' => null, 'short_code' => 'GNC'],
+            ['type' => 'feeding', 'name' => 'MOC', 'short_name' => 'MOC', 'unit' => null, 'short_code' => 'MOC'],
+            ['type' => 'feeding', 'name' => 'Pallet', 'short_name' => 'PALLET', 'unit' => null, 'short_code' => null],
         ];
 
         foreach ($parameters as $param) {

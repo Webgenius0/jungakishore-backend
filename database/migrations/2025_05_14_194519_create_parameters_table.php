@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('parameters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('enter_prise_id')->nullable()->constrained('enterprises')->onDelete('set null');
-            $table->enum('type', ['water', 'soil', 'microbe', 'fish', 'other']);
+            $table->enum('type', ['water', 'soil', 'microbe', 'fish','feeding','other']);
             $table->string('name')->nullable();
             $table->string('short_name')->nullable();
             $table->string('unit')->nullable();
