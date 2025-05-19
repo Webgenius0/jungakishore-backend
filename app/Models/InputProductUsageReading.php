@@ -9,25 +9,23 @@ class InputProductUsageReading extends Model
 {
     /** @use HasFactory<\Database\Factories\InputProductUsageReadingFactory> */
     use HasFactory;
-
     protected $fillable = [
-        'input_remarks_and_rx_id',
+        'input_product_usage_id',
         'product_id',
         'quantity',
         'unit',
-        'applied_or_not',
-        'type',
-        'time',
     ];
 
     protected $casts = [
+        'input_product_usage_id' => 'integer',
+        'product_id' => 'integer',
         'quantity' => 'decimal:2',
-        'applied_or_not' => 'boolean',
+        'unit' => 'string',
     ];
 
-    public function inputRemarksAndRxs()
+    public function inputProductUsage()
     {
-        return $this->belongsTo(InputRemarksAndRx::class);
+        return $this->belongsTo(InputProductUsage::class);
     }
 
     public function product()
