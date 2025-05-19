@@ -30,7 +30,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validateData = $request->validate([
-            'phone' => 'required|string|regex:/^(\+?\d{1,4}[\s-]?)?(\(?\d{1,3}\)?[\s-]?)?[\d\s-]{7,15}$/|max_digits:20|unique:users,phone,NULL,id,deleted_at,NULL',
+            'phone' => 'required|string|regex:/^(\+?\d{1,4}[\s-]?)?(\(?\d{1,3}\)?[\s-]?)?[\d\s-]{7,15}$/|max:20|unique:users,phone,NULL,id,deleted_at,NULL',
             'email' => 'required|string|email|max:150|unique:users,email,NULL,id,deleted_at,NULL',
         ]);
 
