@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\InputFeeding;
+use App\Models\Parameter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class InputFeedingReadingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'input_feeding_id' => InputFeeding::factory(),
+            'parameter_id' => Parameter::where('type', 'feeding')->get()->random()->id,
+            'value' => $this->faker->randomFloat(2, 0, 100),
         ];
     }
 }
