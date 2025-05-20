@@ -27,11 +27,11 @@ class AppServiceProvider extends ServiceProvider
             $this->timestamps();
         });
 
-        // Blueprint::macro('observationFields', function () {
-        //     $this->text('comment')->nullable();
-        //     $this->json('images')->nullable();
-        //     $this->defaultMeta();
-        // });
+        Blueprint::macro('observationFields', function () {
+            $this->text('comment')->nullable();
+            $this->json('images')->nullable();
+            $this->defaultMeta();
+        });
     }
 }
 
