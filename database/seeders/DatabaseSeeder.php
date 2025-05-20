@@ -53,12 +53,12 @@ class DatabaseSeeder extends Seeder
         $this->call(SystemSettingSeeder::class);
         $this->call([RoleSeeder::class, AreaFarmingTypeSeeder::class, AreaMeasurementSeeder::class, ParameterSeeder::class, EnterpriseSeeder::class, CategoryAndSubCategorySeeder::class]);
         $this->call([ProductSeeder::class, PondSeeder::class, ObservationSeeder::class, InputObservationSeeder::class, BiomassObservationSeeder::class, PondObservationSeeder::class, InputFarmerCommentSeeder::class, InputRemarksAndRxSeeder::class, InputFeedingSeeder::class, InputProductUsageSeeder::class]);
-
+        //input reading
         $this->call(InputFeedingReadingSeeder::class);
         $this->call(InputProductUsageReadingSeeder::class);
         $this->call(InputRemarksAndRxReadingSeeder::class);
 
-
+        //pond
         $this->call(PondWaterSeeder::class);
         $this->call(PondSoilSeeder::class);
         $this->call(PondPlanktonSeeder::class);
@@ -68,11 +68,23 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->has(PlanktonSubcategory::factory()->count(3), 'subcategories')
             ->create();
-
+        //pond reading
         $this->call(PondWaterReadingSeeder::class);
         $this->call(PondSoilReadingSeeder::class);
         $this->call(PondPlanktonReadingSeeder::class);
         $this->call(PondMicrobeReadingSeeder::class);
+
+
+        //biomass
+        $this->call(BiomassStocksSeeder::class);
+        $this->call(BiomassGrowthSeeder::class);
+        $this->call( BiomassHarvestSeeder::class);
+        $this->call( BiomassTransferSeeder::class);
+        $this->call(BiomassMortalitySeeder::class);
+         
+        
+        
+        
 
     }
 }
