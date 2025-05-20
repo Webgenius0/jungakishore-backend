@@ -76,13 +76,15 @@ class DatabaseSeeder extends Seeder
 
 
         //biomass
-        $this->call(BiomassStocksSeeder::class);
+        $this->call(BiomassStockSeeder::class);
         $this->call(BiomassGrowthSeeder::class);
         $this->call( BiomassHarvestSeeder::class);
         $this->call( BiomassTransferSeeder::class);
         $this->call(BiomassMortalitySeeder::class);
+
+        //biomass reading
+        $this->call(FishReadingSeeder::class);
          
-        
         
         
 

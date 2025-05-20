@@ -33,4 +33,9 @@ class BiomassGrowth extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+    public function fishReadings()
+    {
+        return $this->hasMany(FishReading::class, 'related_id')->where('type', 'growth');
+    }
+
 }
